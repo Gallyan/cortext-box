@@ -50,21 +50,19 @@ Puis installer le package téléchargé par la commande:
 Pour une installation en machine virtuelle, l'activation des fonctions de virtualisation au niveau du bios est nécessaire. Pour cela, il faut se rendre dans les paramètres du bios lors du redémarrage du PC physique, pour y trouver puis activer l'option Virtualization Technology (VTx).
 
 
-2. Récupération des sources
+2. Configuration des sources
 
-Les sources sont récupérés depuis le serveur github par les commandes suivantes, à exécuter dans le répertoire qui va bien:
+Les sources seront récupérées automatiquement depuis le serveur github par le script install.sh. Il faut créer le fichier repositories.conf par copie du fichier repositories.conf.dist. Il faut ensuite ajouter au fichier la liste des différents repositories à installer.
 
-    git clone --recursive git@github.com:cortext/cortext-auth.git
-    cd cortext-auth/server/vendor/cortext/silex-simpleuser
-    git checkout master
-    cd ../../../../..
-    git clone --recursive git@github.com:cortext/cortext-assets.git
-    git clone --recursive git@github.com:cortext/cortext-manager.git
-    git clone --recursive git@github.com:cortext/cortext-projects.git
-    git clone --recursive git@github.com:cortext/cortext-methods.git
+3. Clonage des sources
 
+Lancer l'installation automatique des sources et de la box par la commande:
+
+    ./install.sh
 
 4. Installation de la machine virtuelle
+
+Lors du premier lancement de vagrant, la machine virtuelle est téléchargée. Cette étape est effectuée automatiquement par le script install.sh exécuté à l'étape précédente. Si ce n'est pas le cas, ou pour lancer la machine virtuelle après l'installation, les commandes manuelles sont décrites ci-dessous.
 
 Executer la commande suivante pour que la box soit téléchargée:
 
