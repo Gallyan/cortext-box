@@ -25,7 +25,7 @@ do
     nb=`expr $nb + 1`
 
     echo -ne "\n\t"; tput setab 7; tput setaf 1;echo -e "3.$nb Clonage de $repo$(tput sgr 0)\n"
-    git clone --recursive -C repo-$name $repo
+    git clone --recursive $repo repo-$name
 
   fi
 done < $liste
