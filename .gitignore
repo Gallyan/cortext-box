@@ -6,9 +6,12 @@
 Vagrantfile
 dummy-data/dummy-assets.tar.gz
 
-# Modules Cortext
-/cortext-*
+# Modules
 log/decode_log
 
 # Install on Windows environment
 win_install.flag
+
+# Repositories
+repositories.conf
+repo-*

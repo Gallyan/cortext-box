@@ -1,0 +1,5 @@
+# Create a copy of this default file without the .dist extension, it will be ignored by git
+# Each repositories will be used with "git clone --recursive"
+# Be sure to have access to those repositories
+# Example:
+#git@github.com:repositories/repositories.git

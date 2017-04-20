@@ -1,6 +1,6 @@
 #/bin/sh
 
-echo -e "\e[1;32m=== Script de suppression de la machine virtuelle et des sources si elles existent\e[0m"
+echo -e "\e[1;32m=== Script de reset de la Dev-Box, suppression de la machine virtuelle et des sources si elles existent\e[0m"
 echo -e "\e[1;31m### Etes-vous sûr de vouloir tout supprimer [o/N] ?"
 read choix
 
@@ -20,11 +20,32 @@ then
    fi
 
    echo -e "\e[1;32m=== Suppression des sources\e[0m"
-   for i in `ls -1|grep cortext-`
+
+   if [ -f repositories.conf ]
+   then
+     liste=repositories.conf
+   else
+     liste=repositories.conf.dist
+   fi
+
+   nb=0
+   while IFS='' read -r line || [[ -n "$line" ]];
    do
-      echo -e "\e[1;32m=== Suppression de $i\e[0m"
-      rm -rf $i
-   done
+     if [ "`echo $line|cut -b 1`" != "#" ]
+     then
+
+       # Lecture des paramètres
+       repo=`echo "$line"|cut -d";" -f1`
+       name=`echo $repo|cut -d "/" -f2|cut -d "." -f1`
+
+       echo -e "\e[1;32m=== Suppression de $repo\e[0m"
+       rm -rf repo-$name
+
+       nb=`expr $nb + 1`
+
+     fi
+   done < $liste
+
 else
    echo -e "\e[1;32m=== Annulation de la suppression\e[0m"
 fi

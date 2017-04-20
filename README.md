@@ -1,5 +1,5 @@
-Cortext Box
-===========
+Dev Box
+=======
 
 ## git configuration on Windows
 
@@ -25,7 +25,7 @@ These parameters can also be directly modified in the config file c:\ProgramData
 - [install vagrant on osx]()
 - [install vagrant on Windows](https://www.vagrantup.com/downloads.html)
 
-## Bootstrap the Cortext Box on Linux !
+## Bootstrap the Dev Box on Linux !
 
 Then execute these instructions to put the vagrant file on `/home/<user>/boxes/cortext-box`. Do the addition to /etc/hosts only once, if you install multiple boxes.
 

@@ -1,28 +1,46 @@
-#!/bin/sh
+#/bin/bash
 
-tput setab 7; tput setaf 1;echo "3. Récupération des sources depuis GitHub$(tput sgr 0)"
+tabs 4
 
-tput setab 7; tput setaf 1;echo "3.1 Cortext-auth$(tput sgr 0)"
-git clone --recursive git@github.com:cortext/cortext-auth.git
+tput setab 7; tput setaf 0;echo ">>> 3. Récupération des sources depuis GitHub$(tput sgr 0)"
 
-tput setab 7; tput setaf 1;echo "3.2 Silex-simpleuser$(tput sgr 0)"
-cd cortext-auth/server/vendor/cortext/silex-simpleuser
-git checkout master
-cd ../../../../..
+if [ -f repositories.conf ]
+then
+  liste=repositories.conf
+else
+  liste=repositories.conf.dist
+fi
 
-tput setab 7; tput setaf 1;echo "3.3 Cortext-assets$(tput sgr 0)"
-git clone --recursive git@github.com:cortext/cortext-assets.git
+nb=0
+while IFS='' read -r line || [[ -n "$line" ]];
+do
+  if [ "`echo $line|cut -b 1`" != "#" ]
+  then
 
-tput setab 7; tput setaf 1;echo "3.4 Cortext-manager$(tput sgr 0)"
-git clone --recursive git@github.com:cortext/cortext-manager.git
+    # Lecture des paramètres
+    repo=`echo "$line"|cut -d";" -f1`
+    name=`echo $repo|cut -d "/" -f2|cut -d "." -f1`
+    # param2=`echo "$line"|cut -d";" -f2`
+    # param3=`echo "$line"|cut -d";" -f3`
+    nb=`expr $nb + 1`
 
-tput setab 7; tput setaf 1;echo "3.5 Cortext-projects$(tput sgr 0)"
-git clone --recursive git@github.com:cortext/cortext-projects.git
+    echo -ne "\n\t"; tput setab 7; tput setaf 1;echo -e "3.$nb Clonage de $repo$(tput sgr 0)\n"
+    git clone --recursive -C repo-$name $repo
 
-tput setab 7; tput setaf 1;echo "3.6 Cortext-methods$(tput sgr 0)"
-git clone --recursive git@github.com:cortext/cortext-methods.git
+  fi
+done < $liste
 
-tput setab 7; tput setaf 1;echo "4. Téléchargement de la machine virtuelle$(tput sgr 0)"
-echo "Une fois la machine virtuelle démarrée, lancer la suite de l'exécution par la commande suivante:"
-echo "install_inside.sh"
+if [ $nb -eq 0 ]
+then
+  echo -ne "\n\t"; tput setab 1; tput setaf 7; echo -e "Attention aucun repository n'est configuré$(tput sgr 0)\n"
+elif [ $nb -eq 1 ]
+then
+  echo -ne "\n\t"; tput setab 2; tput setaf 7; echo -e "Installation d'un seul repository$(tput sgr 0)\n"
+else
+  echo -ne "\n\t"; tput setab 2; tput setaf 7; echo -e "Installation de $nb repositories$(tput sgr 0)\n"
+fi
+
+tput setab 7; tput setaf 0;echo ">>> 4. Téléchargement de la machine virtuelle$(tput sgr 0)"
+echo -e "\n\tUne fois la machine virtuelle démarrée, lancer la suite de l'exécution par la commande suivante:"
+echo -e "\tinstall_inside.sh"
 vagrant up && vagrant ssh
