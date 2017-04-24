@@ -27,32 +27,32 @@ These parameters can also be directly modified in the config file c:\ProgramData
 
 ## Bootstrap the Dev Box on Linux !
 
-Then execute these instructions to put the vagrant file on `/home/<user>/boxes/cortext-box`. Do the addition to /etc/hosts only once, if you install multiple boxes.
+Then execute these instructions to put the vagrant file on `/home/<user>/boxes/dev-box`. Do the addition to /etc/hosts only once, if you install multiple boxes.
 
     $ mkdir ~/boxes
     $ cd ~/boxes
-    $ git clone --recursive git@github.com:cortext/cortext-box.git
-    $ cd cortext-box
+    $ git clone --recursive git@github.com:Gallyan/dev-box.git
+    $ cd dev-box
     $ ./install.sh
     $ install_inside.sh 
     $ exit
-    $ echo "127.0.0.1 auth.cortext.dev assets.cortext.dev cortext.dev www.cortext.dev documents.cortext.dev manager.cortext.dev" | sudo tee --append /etc/hosts > /dev/null
+    $ echo "127.0.0.1 localhost.dev" | sudo tee --append /etc/hosts > /dev/null
     $ vagrant reload
 
 That's it !
 
 You can go to http://10.10.10.10:3000
 
-## Bootstrap the Cortext Box on Windows !
+## Bootstrap the Dev Box on Windows !
 
 Open an administrator shell window and go to the directory where you want to install cortext-box. Then execute these instructions. Do the addition to c:/windows/system32/drivers/etc/hosts only once, if you install multiple boxes.
 
-    $ git clone --recursive git@github.com:cortext/cortext-box.git
-    $ cd cortext-box
+    $ git clone --recursive git@github.com:Gallyan/dev-box.git
+    $ cd dev-box
     $ install_win.bat
     $ install_inside.sh 
     $ exit
-    $ echo 127.0.0.1       auth.cortext.dev assets.cortext.dev cortext.dev www.cortext.dev documents.cortext.dev manager.cortext.dev >> c:/windows/system32/drivers/etc/hosts
+    $ echo 127.0.0.1       localhost.dev >> c:/windows/system32/drivers/etc/hosts
     $ vagrant reload
 
 That's it !
@@ -62,7 +62,7 @@ You can go to http://127.0.0.1:3000
 Usage
 -----
 
-  * The document root for web projects is  ~/cortext-box/src/cortext
+  * The document root for web projects is  /vagrant/www
   * The VM apache web server is accessible at http://10.10.10.10:8080
   * The VM Meteor Frontend is accessible at http://10.10.10.10:3000
   * Use `vagrant ssh` to log into the VM
@@ -71,19 +71,7 @@ Usage
   * Use `vagrant reload` to reboot it
   * Use `vagrant up` to start it
   * Use `vagrant destroy` to delete it
-  * You can modify the parameters in the file ~/cortext-box/Vagrantfile
-
-# Run Cortext projects
-
-The /src/cortext/ directory contains remote git sub modules wich points to cortext projects.
-Current Projects :
-  * `/cortext-auth` : Auth server (build on top of oAuth2) and user manager (in php with symfony/silex)
-  * `/cortext-assets` :  Assets server (ie files, directories, analysis, ...)
-  * `/cortext-manager` : Core job manager and script launcher interface
-
-To be commited :
-  * `/cortext-dashboard` : Simple web app to navigate within scripts, assets, and view results of your analysis
-  * `/cortext-project` : Complete web app to manage collaborative work and projects
+  * You can modify the parameters in the file ~/dev-box/Vagrantfile
 
 FAQ 
 ---
