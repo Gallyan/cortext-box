@@ -1,2 +1,2 @@
 <?php
-echo "Dev Box installé"
+echo "Dev Box installé";
