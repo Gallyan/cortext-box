@@ -5,6 +5,7 @@ sudo debconf-set-selections /vagrant/preconfig.txt 2> /dev/null
 
 tput setab 7; tput setaf 1;echo "5.2 Téléchargement des packages$(tput sgr 0)"
 sudo apt-get update
+sudo apt-get upgrade -y --force-yes
 sudo apt-get install -y --force-yes apache2 php5 php5-mysql mysql-server phpmyadmin libapache2-mod-wsgi libapache2-mod-php5 mysql-client php-pear curl php5-cli php5-dev php5-gd php5-curl php5-intl postfix mailutils git python-setuptools htop atop nethogs nmap multitail
 
 
