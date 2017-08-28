@@ -15,13 +15,6 @@ curl -s https://getcomposer.org/installer | php
 sudo ln -s /home/vagrant/composer.phar /usr/local/bin/composer
 
 
-tput setab 7; tput setaf 1;echo "5.4 Installation de PHPUnit$(tput sgr 0)"
-cd
-wget https://phar.phpunit.de/phpunit.phar
-chmod +x phpunit.phar
-sudo mv phpunit.phar /usr/bin/phpunit
-
-
 tput setab 7; tput setaf 1;echo "7.1 Fichiers de configuration de PHP$(tput sgr 0)"
 cd /vagrant/config_files/
 sudo cp etc/php5/cli/php.ini /etc/php5/cli/php.ini
@@ -47,7 +40,7 @@ cp home/vagrant/.bashrc /home/vagrant/.bashrc
 cp home/vagrant/.bash_aliases /home/vagrant/.bash_aliases
 chmod 644 /home/vagrant/.bash_aliases
 sudo cp root/.bashrc /root/.bashrc
-sh /home/vagrant/.bashrc
+source /home/vagrant/.bashrc
 
 
 tput setab 7; tput setaf 1;echo "7.5 Configuration Apache$(tput sgr 0)"
@@ -103,7 +96,7 @@ echo "exit"
 echo "vagrant reload"
 if [ -e /vagrant/win_install.flag ]
 then
-  echo "Puis acceder à la page web http://127.0.0.1:3000"
+  echo "Puis acceder à la page web http://127.0.0.1:8080"
 else
-  echo "Puis acceder à la page web http://10.10.10.10:3000"
+  echo "Puis acceder à la page web http://10.10.10.10:8080"
 fi
